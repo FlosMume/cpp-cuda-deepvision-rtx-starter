@@ -1,0 +1,30 @@
+
+# Build artifacts
+/build/
+/cmake-build-*/
+*.o
+*.obj
+*.pdb
+*.exe
+*.dll
+*.lib
+*.exp
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+
+# VSCode
+.vscode/
+.idea/
+
+# Python (if used for utilities)
+__pycache__/
+*.pyc
+.venv/
+
+# Logs
+*.log
