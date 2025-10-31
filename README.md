@@ -1,7 +1,7 @@
 
 # DeepVision-RTX (Starter)
 
-A CUDA C++ practice project for **RTX 4070 SUPER (Ada 8.9)** to build the same skills used for overlapping transfers with compute (streams + pinned memory), basic kernel optimization (1D & 2D grids), and event timing suitable for Nsight Systems/Compute.
+A CUDA C++ practice project designed for the RTX 4070 SUPER (Ada 8.9), demonstrating how to overlap data transfers with computation using streams and pinned memory, apply basic kernel optimizations with 1D and 2D grid configurations, and perform precise event timing for profiling in Nsight Systems and Nsight Compute.
 
 ## What’s here?
 - **Pinned host memory** + `cudaMemcpyAsync` to demonstrate overlap
