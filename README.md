@@ -1,6 +1,6 @@
-# DeepVision-RTX Starter (Enhanced NVIDIA-Style README)
+# DeepVision-RTX Starter
 
-This is an upgraded, NVIDIA-grade README combining:
+This is an enhanced README combining:
 - GitHub-friendly formatting  
 - Technical deep dive  
 - ASCII diagrams  
@@ -87,5 +87,3 @@ src/
 - Compare against cuDNN for 3×3 conv  
 
 ---
-
-This README is designed to be a strong portfolio artifact demonstrating CUDA engineering ability, profiling knowledge, memory hierarchy understanding, and GPU architecture reasoning.
