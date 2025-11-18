@@ -10,7 +10,7 @@ This is an enhanced README combining:
 - GPU hardware reasoning  
 
 ## Architecture Diagram (SVG)
-![Architecture Diagram](ocs/architecture.svg)
+![Architecture Diagram](docs/architecture.svg)
 
 ## Streams Overlap Diagram (SVG)
 ![Streams Timeline](docs/streams_overlap.svg)
