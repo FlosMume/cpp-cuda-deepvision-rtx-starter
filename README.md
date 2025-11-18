@@ -9,11 +9,11 @@ This is an enhanced README combining:
 - Architecture explanations  
 - GPU hardware reasoning  
 
-## Architecture Diagram (PNG)
-![Architecture Diagram](architecture.png)
+## Architecture Diagram (SVG)
+![Architecture Diagram](ocs/architecture.svg)
 
-## Streams Overlap Diagram (PNG)
-![Streams Timeline](streams_overlap.png)
+## Streams Overlap Diagram (SVG)
+![Streams Timeline](docs/streams_overlap.svg)
 
 ## ASCII Architecture Diagram
 ```
