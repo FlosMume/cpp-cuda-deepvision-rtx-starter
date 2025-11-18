@@ -1,33 +1,91 @@
+# DeepVision-RTX Starter (Enhanced NVIDIA-Style README)
 
-# DeepVision-RTX (Starter)
+This is an upgraded, NVIDIA-grade README combining:
+- GitHub-friendly formatting  
+- Technical deep dive  
+- ASCII diagrams  
+- Rendered PNG diagrams  
+- Profiling workflow  
+- Architecture explanations  
+- GPU hardware reasoning  
 
-A CUDA C++ practice project designed for the RTX 4070 SUPER (Ada 8.9), demonstrating how to overlap data transfers with computation using streams and pinned memory, apply basic kernel optimizations with 1D and 2D grid configurations, and perform precise event timing for profiling in Nsight Systems and Nsight Compute.
+## Architecture Diagram (PNG)
+![Architecture Diagram](architecture.png)
 
-## What’s here?
-- **Pinned host memory** + `cudaMemcpyAsync` to demonstrate overlap
-- **Multiple streams** for concurrent copy/compute
-- **Timed sections** with `cudaEventRecord` / `cudaEventElapsedTime`
-- **Kernels**: `saxpy` (1D), `blur3x3_naive` (2D)
+## Streams Overlap Diagram (PNG)
+![Streams Timeline](streams_overlap.png)
 
-## Build
+## ASCII Architecture Diagram
+```
+   +-------------------+      PCIe / DMA      +---------------------+
+   |      CPU Host     |  ----------------->  |     GPU Global      |
+   |  (Pinned Memory)  |  <-----------------  |      Memory         |
+   +-------------------+                      +---------------------+
+            |                                           |
+            | Launch Kernels                            |
+            v                                           v
+      +--------------+                          +------------------+
+      | CUDA Driver  |                          |  SMs (Ada 8.9)   |
+      | Runtime API  |                          |  Warps / Threads |
+      +--------------+                          +------------------+
+```
+
+## ASCII Streams Overlap Diagram
+```
+Time →
+----------------------------------------------------------------------
+H2D Stream 0: [========== copy =========]
+H2D Stream 1:         [========== copy =========]
+Compute Stream 2:             [==== kernel ====]
+D2H Stream 0:                           [==== copy ====]
+----------------------------------------------------------------------
+```
+
+## Build Instructions
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j
 ./build/deepvision_rtx
 ```
 
-## Profile (examples)
+## Profiling Instructions (Nsight Systems & Nsight Compute)
 ```bash
-# Nsight Systems GUI (on host with CUDA Toolkit installed)
 nsys profile -o nsys_report ./build/deepvision_rtx
-
-# Nsight Compute single-kernel collection
-ncu --set full --target-processes all ./build/deepvision_rtx
+ncu --set full ./build/deepvision_rtx
 ```
 
-## Next steps
-- Convert blur kernel to **shared-memory tiled** version
-- Add **half-precision** path to prep for Tensor Cores
-- Compare end-to-end with **cuDNN** and optionally TensorRT
+## Project Structure
+```
+src/
+   main.cpp            # Entry point
+   main.cu             # Separate experimental demo
+   conv_kernels.cu     # SAXPY + blur3x3 kernels
+   conv_kernels.cuh    # Kernel declarations
+   utils/
+       check_cuda.hpp  # Error-checking utilities
 ```
 
+## GPU Architecture Notes (RTX 4070 SUPER - Ada 8.9)
+- SM count: 46  
+- Warp size: 32  
+- Max threads/block: 1024  
+- Memory bandwidth: 504 GB/s  
+- Concurrent copy/compute supported  
+- Best performance achieved when:
+  - You use pinned memory  
+  - H2D and D2H overlap with compute  
+  - Kernels maintain good occupancy  
+
+## Roadmap Aligned to NVIDIA Developer Tech Expectations
+- Add shared-memory tiled blur  
+- Add constant-memory kernel variants  
+- Add half-precision path (FP16)  
+- Add Tensor Core WMMA version  
+- Add occupancy analysis + roofline plot  
+- Add Nsight Compute performance tables  
+- Add multi-kernel pipelines  
+- Compare against cuDNN for 3×3 conv  
+
+---
+
+This README is designed to be a strong portfolio artifact demonstrating CUDA engineering ability, profiling knowledge, memory hierarchy understanding, and GPU architecture reasoning.
