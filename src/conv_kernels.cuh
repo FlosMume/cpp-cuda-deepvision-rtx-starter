@@ -1,12 +1,16 @@
-
 #pragma once
-// NCHW naive conv forward + bias + ReLU-ready output
-void launch_conv2d_naive_nchw(
-  const float* x, const float* w, const float* b, float* y,
-  int N, int C_in, int H, int W,
-  int C_out, int K_h, int K_w,
-  int stride_h, int stride_w,
-  int pad_h, int pad_w);
 
-// Rough FLOPs estimator for conv2d (forward)
-float gflops_conv2d(int N,int C_in,int H,int W,int C_out,int K_h,int K_w,int stride_h,int stride_w,float ms);
+#include <cuda_runtime.h>
+
+// Simple SAXPY: z = a * x + y
+__global__ void saxpy_kernel(const float* __restrict__ x,
+                             const float* __restrict__ y,
+                             float*       __restrict__ z,
+                             float        a,
+                             int          n);
+
+// Naive 3x3 box blur on a single-channel H×W image
+__global__ void blur3x3_naive(const float* __restrict__ in,
+                              float*       __restrict__ out,
+                              int          H,
+                              int          W);
