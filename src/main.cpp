@@ -4,11 +4,12 @@
 #include <string>
 #include <cuda_runtime.h>
 #include "utils/check_cuda.hpp"
+#include "conv_kernels.cuh"
 
-extern "C" {
-void saxpy_kernel(const float* x, const float* y, float* z, float a, int n);
-void blur3x3_naive(const float* in, float* out, int H, int W);
-}
+//extern "C" {
+//void saxpy_kernel(const float* x, const float* y, float* z, float a, int n);
+//void blur3x3_naive(const float* in, float* out, int H, int W);
+//}
 
 static void eventElapsedMS(cudaEvent_t beg, cudaEvent_t end, const char* tag) {
     float ms = 0.f;
