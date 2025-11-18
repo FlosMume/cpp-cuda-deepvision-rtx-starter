@@ -76,7 +76,7 @@ src/
   - H2D and D2H overlap with compute  
   - Kernels maintain good occupancy  
 
-## Roadmap Aligned to NVIDIA Developer Tech Expectations
+## Roadmap
 - Add shared-memory tiled blur  
 - Add constant-memory kernel variants  
 - Add half-precision path (FP16)  
